@@ -12,7 +12,7 @@ Import-Module -Force -Scope Global (Get-RepositoryResolvedPath 'logistics\script
 function Get-DefaultConfiguration([hashtable] $config = @{ }) {
     $config.binariesSourceUrl = 'http://get.enterprisedb.com/postgresql/'
     $config.binariesArchiveName = 'postgresql-{0}-2-windows-x64-binaries.zip'
-    $config.binariesVersion = '12.2'
+    $config.binariesVersion = '13.6'
     $config.binariesTempDirectory = Join-Path $env:temp 'PostgreSQL.Binaries'
     $config.binariesArchiveExtractedName = 'pgsql'
 
