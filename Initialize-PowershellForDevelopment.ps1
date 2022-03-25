@@ -61,8 +61,8 @@ function global:Update-SolutionScripts {
         }
     }
 }
-
-Find-BlockedFiles
+# todo ODS-5341 only execute this in Windows since Unix doesn't have the notion of blocked files
+#Find-BlockedFiles
 Install-RequiredPackageProvider
 Update-SolutionScripts
 

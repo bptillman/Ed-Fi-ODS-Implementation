@@ -55,7 +55,7 @@ function Add-RandomKeySecret {
 }
 
 function Get-TestHarnessExecutable {
-    $testHarnessExecutableFilter = "$(Get-RepositoryResolvedPath "\Application\$($script:testHarnessName)")\bin\**\$($script:testHarnessName).exe"
+    $testHarnessExecutableFilter = "$(Get-RepositoryResolvedPath "\Application\$($script:testHarnessName)")\bin\**\$($script:testHarnessName)" # todo ODS-5341 add .exe in Windows
     $testHarnessExecutable = (Get-ChildItem -Recurse -Path $testHarnessExecutableFilter).FullName
 
     return $testHarnessExecutable
@@ -65,7 +65,7 @@ function Get-SdkGenExecutable {
     Param(
         [string] $buildConfiguration = "Debug"
     )
-    $sdkGenExecutableFilter = "$(Get-RepositoryResolvedPath "\Utilities\SdkGen\EdFi.SdkGen.Console\bin\$buildConfiguration\**\EdFi.SdkGen.Console.exe")"
+    $sdkGenExecutableFilter = "$(Get-RepositoryResolvedPath "\Utilities\SdkGen\EdFi.SdkGen.Console\bin\$buildConfiguration\**\EdFi.SdkGen.Console")" # todo ODS-5341 add .exe in Windows
     $sdkGenExecutable = (Get-ChildItem -Recurse -Path $sdkGenExecutableFilter).FullName
 
     return $sdkGenExecutable
@@ -124,6 +124,7 @@ function Start-TestHarness {
         }
         catch {
             Write-Host "Waiting for TestHarness startup at $apiUrl..."
+            Start-Sleep -s 1
         }
     }
 

@@ -68,7 +68,7 @@ if ([string]::IsNullOrWhiteSpace($key)) { $key = Get-RandomString }
 if ([string]::IsNullOrWhiteSpace($secret)) { $secret = Get-RandomString }
 
 if ([string]::IsNullOrWhiteSpace($smokeTestExe) -or -not (Test-Path $smokeTestExe)) {
-    $smokeTestExe = "$(Get-RepositoryResolvedPath "Utilities\DataLoading\EdFi.SmokeTest.Console")\bin\**\EdFi.SmokeTest.Console.exe"
+    $smokeTestExe = "$(Get-RepositoryResolvedPath "Utilities\DataLoading\EdFi.SmokeTest.Console")\bin\**\EdFi.SmokeTest.Console" # todo ODS-5341 add .exe in Windows
 }
 else { $noRebuild = $true }
 
@@ -98,7 +98,7 @@ function Get-SmokeTestConfiguration {
     $config.testHarnessJsonConfig = "$(Get-RepositoryResolvedPath "logistics\scripts\smokeTestHarnessConfiguration.json")"
     $config.testHarnessJsonConfigLEAs = @()
 
-    $config.bulkLoadTempJsonConfig = Join-Path $env:temp "smokeTestconfig.json"
+    $config.bulkLoadTempJsonConfig = Join-Path @([IO.Path]::GetTempPath()) "smokeTestconfig.json"
 
     $config.buildConfiguration = "Debug"
     if (-not [string]::IsNullOrWhiteSpace($env:msbuild_buildConfiguration)) { $config.buildConfiguration = $env:msbuild_buildConfiguration }

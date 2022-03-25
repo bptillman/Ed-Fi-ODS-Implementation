@@ -100,8 +100,10 @@ function Get-NuGetPackage {
         $PackageSource = "https://pkgs.dev.azure.com/ed-fi-alliance/Ed-Fi-Alliance-OSS/_packaging/EdFi/nuget/v3/index.json"
     )
 
+    # todo ODS-5341 use Mono only in Unix
     $nuget = Install-NuGetCli $ToolsPath
     $parameters = @(
+        $nuget,
         "install", $PackageName,
         "-source", $PackageSource,
         "-outputDirectory", $OutputDirectory
@@ -111,8 +113,8 @@ function Get-NuGetPackage {
         $parameters += $PackageVersion
     }
     
-    Write-Host -ForegroundColor Magenta "$ToolsPath\nuget $parameters"
-    & "$ToolsPath\nuget" $parameters | Out-Null
+    Write-Host -ForegroundColor Magenta "mono $parameters"
+    & "mono" $parameters | Out-Null
 
     return Resolve-Path $outputDirectory/$PackageName.$PackageVersion* | Select-Object -Last 1
 }

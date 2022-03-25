@@ -29,7 +29,7 @@ $script:environmentJson = (Join-Path $script:postmanFolder "environment.json")
 function Install-Newman {
     $nodeVersion = Get-ValueOrDefault (Get-TeamCityParameters)['node.version'] '12.4.0'
 
-    Select-NodeVersion $nodeVersion
+    # Select-NodeVersion $nodeVersion todo ODS-5341 nvm is not supported in PS Core Unix
 
     try {
         npm install -g newman@5.2.2 newman-reporter-teamcity@0.1.12 newman-reporter-html@1.0.5

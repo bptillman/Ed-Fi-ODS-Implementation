@@ -28,7 +28,7 @@ function Test-PostgreSQLBinariesInstalled {
 
 function Get-PostgreSQLBinariesPath { return (Resolve-path "$script:toolsPath/$script:packageName.$script:packageVersion/tools/").Path }
 
-function Get-PSQLPath { return (Resolve-path (Join-Path (Get-PostgreSQLBinariesPath) 'psql.exe')).Path }
+function Get-PSQLPath { return 'psql' } # todo ODS-5341 create a package that contains psql Unix binaries
 
 function Get-PGDumpPath { return (Resolve-path (Join-Path (Get-PostgreSQLBinariesPath) 'pg_dump.exe')).Path }
 
@@ -69,7 +69,8 @@ function Invoke-PsqlCommand {
         [string[]] [Parameter(Mandatory = $true)] $commands
     )
 
-    if (-not (Test-PostgreSQLBinariesInstalled)) { Install-PostgreSQLBinaries }
+    # todo ODS-5341 create a package that contains psql Unix binaries
+    #if (-not (Test-PostgreSQLBinariesInstalled)) { Install-PostgreSQLBinaries }
 
     $params = @(
         "--echo-errors",

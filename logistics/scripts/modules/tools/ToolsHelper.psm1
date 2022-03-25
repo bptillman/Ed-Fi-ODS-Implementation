@@ -156,6 +156,8 @@ function Install-ToolCodeGenUtility {
 }
 
 function Test-DotNetCore {
+    # todo ODS-5341 use dotnet --info instead of Get-Command
+    return
     $requiredMajor = 6
     $requiredMinor = 0
 
