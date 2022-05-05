@@ -19,12 +19,6 @@ param (
     $BuildIncrementer = "0",
 
     [string]
-    $PreReleaseLabel,
-
-    [switch]
-    $Publish,
-
-    [string]
     $NuGetFeed,
 
     [string]
@@ -45,15 +39,10 @@ $parameters = @{
     PackageDefinitionFile = Resolve-Path ("$PSScriptRoot/EdFi.Installer.SandboxAdmin.nuspec")
     Version               = $SemanticVersion
     OutputDirectory       = Resolve-Path $PSScriptRoot
-    Publish               = $Publish
+    Publish               = $true
     Source                = $NuGetFeed
     ApiKey                = $NuGetApiKey
     ToolsPath             = "../../../tools"
-}
-
-if ($PreReleaseLabel) {
-    Write-Host "Adding preRelease suffix of $PreReleaseLabel."
-    $parameters.Suffix = "$PreReleaseLabel$($BuildCounter.PadLeft(4,'0'))"
 }
 
 Invoke-CreatePackage @parameters -Verbose:$verbose

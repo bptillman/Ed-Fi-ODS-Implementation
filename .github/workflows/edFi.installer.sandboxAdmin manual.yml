@@ -19,6 +19,6 @@ jobs:
     - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
     - name: build
       run: |
-        .\build-package.ps1 -InformationalVersion ${{env.INFORMATIONAL_VERSION}} -BuildCounter ${{ github.run_number }} -BuildIncrementer ${{env.BUILD_INCREMENTER}} -Publish ${{true}} -NugetFeed ${{env.AZURE_ARTIFACT_URL}}
+        .\build-package.ps1 -InformationalVersion ${{env.INFORMATIONAL_VERSION}} -BuildCounter ${{ github.run_number }} -BuildIncrementer ${{env.BUILD_INCREMENTER}} -NugetFeed ${{env.AZURE_ARTIFACT_URL}}
       shell: pwsh
       working-directory: Scripts/NuGet/EdFi.Installer.SandboxAdmin
