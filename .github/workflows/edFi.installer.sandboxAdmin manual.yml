@@ -13,22 +13,12 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
-    - name: Display the path
-      run: echo $pwd
+    - name: build
+      run: |
+        .\build-package.ps1 -InformationalVersion ${{env.INFORMATIONAL_VERSION}} -BuildCounter ${{ github.run_number }} -BuildIncrementer ${{env.BUILD_INCREMENTER}} -Publish ${{true}} -NugetFeed ${{env.AZURE_ARTIFACT_URL}}
       shell: pwsh
-    - name: Display contents of current working directory
-      run: ls
-      shell: pwsh
-    - name: Display contents of Scripts folder
-      run: ls
-      shell: pwsh
-      working-directory: Scripts # this works
-    - name: Display contents of Scripts/Nuget
-      run: ls
-      shell: pwsh
-      working-directory: Scripts/Nuget # this does not. Either as this or ./Scripts/Nuget or .\Scripts\Nuget or Scripts\Nuget
-
+      working-directory: Scripts/NuGet/EdFi.Installer.SandboxAdmin
