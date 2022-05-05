@@ -51,6 +51,9 @@ $parameters = @{
     ToolsPath             = "../../../tools"
 }
 
-if ($PreReleaseLabel) { $parameters.Suffix = "$PreReleaseLabel$($BuildCounter.PadLeft(4,'0'))" }
+if ($PreReleaseLabel) {
+    Write-Host "Adding preRelease suffix of $PreReleaseLabel."
+    $parameters.Suffix = "$PreReleaseLabel$($BuildCounter.PadLeft(4,'0'))"
+}
 
 Invoke-CreatePackage @parameters -Verbose:$verbose
