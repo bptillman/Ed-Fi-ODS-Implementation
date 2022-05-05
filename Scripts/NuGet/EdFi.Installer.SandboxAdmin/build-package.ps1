@@ -38,6 +38,9 @@ $verbose = $PSCmdlet.MyInvocation.BoundParameters["Verbose"]
 
 Import-Module "$PSScriptRoot/../../../logistics/scripts/modules/packaging/create-package.psm1" -Force
 
+$newRevision = ([int]$BuildCounter) + ([int]$BuildIncrementer)
+$SemanticVersion = "$InformationalVersion.$newRevision"
+
 $parameters = @{
     PackageDefinitionFile = Resolve-Path ("$PSScriptRoot/EdFi.Installer.SandboxAdmin.nuspec")
     Version               = $SemanticVersion
