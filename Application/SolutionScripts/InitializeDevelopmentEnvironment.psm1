@@ -111,6 +111,8 @@ function Initialize-DevelopmentEnvironment {
 
         [switch] $UsePlugins,
 
+        [String] $RepositoryRoot,
+
         [string] $PackageVersion
     )
 
@@ -147,7 +149,7 @@ function Initialize-DevelopmentEnvironment {
 
         if (-not [string]::IsNullOrWhiteSpace((Get-DeploymentSettings).Plugin.Folder)) { $script:result += Install-Plugins }
 
-        if (-not $ExcludeCodeGen) { $script:result += Invoke-CodeGen }
+        if (-not $ExcludeCodeGen) { $script:result += Invoke-CodeGen -Engine $Engine -RepositoryRoot $RepositoryRoot }
 
         if (-not $NoRebuild) {
             $script:result += Invoke-RebuildSolution
